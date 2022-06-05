@@ -1,0 +1,49 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+<h2>Product List</h2>
+<div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">ID</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Colour</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Process</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td><img src="@product.ImagePath" height="50"/></td>
+                    <td>@product.ProductId</td>
+                    <td>@product.Supplier</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.Price TL</td>
+                    <td>@product.Colour.ColourName</td>
+                    <td>@product.Category.CategoryName</td>
+                    <td>@product.Description</td>
+                    <td>
+                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.ProductId"
+                            asp-route-slug="@product.Slug" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.ProductId"
+                            asp-route-slug="@product.Slug" class="btn btn-warning">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Product" asp-action="Add" class="btn btn-primary mb-2 mt-2">Add New Product</a>
+
+   
+</div>
